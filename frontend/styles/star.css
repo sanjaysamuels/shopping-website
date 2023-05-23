@@ -1,0 +1,42 @@
+body {
+  background: #eee;
+}
+
+:root {
+  --opacity: 50%;
+}
+
+
+.stars.disabled{
+  pointer-events: none;
+}
+
+.stars {
+  margin: 0;
+  width: 40px;
+  padding: 0;
+  display: flex;
+}
+
+.stars a {
+  opacity: 50%;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.stars:hover a {
+  opacity: 100%;
+  cursor: pointer;
+}
+
+.stars a:hover {
+  opacity: 100%;
+}
+
+.stars a:hover ~ a {
+  opacity: 50%;
+}
+
+.stars a.active{
+  opacity: 100%;
+}

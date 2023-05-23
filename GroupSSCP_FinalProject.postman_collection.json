@@ -1,0 +1,2484 @@
+{
+	"info": {
+		"_postman_id": "9a530a60-4942-45fb-bca1-ad2f0fc6b139",
+		"name": "GroupSSCP_FinalProject",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "507201"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "[POST] CreateUsers",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"var json = pm.response.json();",
+									"pm.collectionVariables.set(\"userId\", json.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "email",
+								"value": "mail@gmai",
+								"type": "text"
+							},
+							{
+								"key": "password",
+								"value": "",
+								"type": "text"
+							},
+							{
+								"key": "username",
+								"value": "",
+								"type": "text"
+							},
+							{
+								"key": "purchaseHistory",
+								"value": "",
+								"type": "text"
+							},
+							{
+								"key": "shippingAddress",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\":\"{{$randomPassword}}{{$randomAlphaNumeric}}{{$randomAlphaNumeric}}{{$randomAlphaNumeric}}{{$randomAlphaNumeric}}{{$randomAlphaNumeric}}@gmail.com\",\n    \"password\":\"newtest123\",\n    \"username\":\"{{$randomPassword}}{{$randomAlphaNumeric}}{{$randomAlphaNumeric}}{{$randomAlphaNumeric}}{{$randomAlphaNumeric}}{{$randomAlphaNumeric}}\",\n    \"purchase_history\":\"Grapes\",\n    \"shipping_address\":\"123, King N\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:7266/user/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7266",
+							"path": [
+								"user",
+								"register"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "milk@gmail.com",
+									"disabled": true
+								},
+								{
+									"key": "password",
+									"value": "milk123",
+									"disabled": true
+								},
+								{
+									"key": "username",
+									"value": "milkman",
+									"disabled": true
+								},
+								{
+									"key": "purchaseHistory",
+									"value": "Honey, Milk",
+									"disabled": true
+								},
+								{
+									"key": "shippingAddress",
+									"value": "123, Milk St N",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[POST] CreateUsers [Invalid username]",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"[NEGATIVE TEST CASE] Invalid username entered\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.message).to.eql(\"Username already taken, Please try a different username!\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "email",
+								"value": "mail@gmai",
+								"type": "text"
+							},
+							{
+								"key": "password",
+								"value": "",
+								"type": "text"
+							},
+							{
+								"key": "username",
+								"value": "",
+								"type": "text"
+							},
+							{
+								"key": "purchaseHistory",
+								"value": "",
+								"type": "text"
+							},
+							{
+								"key": "shippingAddress",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\":\"sanj@gmail.com\",\n    \"password\":\"newtest123\",\n    \"username\":\"san\",\n    \"purchase_history\":\"Grapes\",\n    \"shipping_address\":\"123, King N\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:7266/user/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7266",
+							"path": [
+								"user",
+								"register"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "milk@gmail.com",
+									"disabled": true
+								},
+								{
+									"key": "password",
+									"value": "milk123",
+									"disabled": true
+								},
+								{
+									"key": "username",
+									"value": "milkman",
+									"disabled": true
+								},
+								{
+									"key": "purchaseHistory",
+									"value": "Honey, Milk",
+									"disabled": true
+								},
+								{
+									"key": "shippingAddress",
+									"value": "123, Milk St N",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[POST] CreateUsers [Invalid email]",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"[NEGATIVE TEST CASE] Invalid email ID entered\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.message).to.eql(\"Email already taken, Please try a different email!\");",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "email",
+								"value": "mail@gmai",
+								"type": "text"
+							},
+							{
+								"key": "password",
+								"value": "",
+								"type": "text"
+							},
+							{
+								"key": "username",
+								"value": "",
+								"type": "text"
+							},
+							{
+								"key": "purchaseHistory",
+								"value": "",
+								"type": "text"
+							},
+							{
+								"key": "shippingAddress",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\":\"san@gmail.com\",\n    \"password\":\"newtest123\",\n    \"username\":\"{{$randomPassword}}{{$randomAlphaNumeric}}{{$randomAlphaNumeric}}{{$randomAlphaNumeric}}{{$randomAlphaNumeric}}{{$randomAlphaNumeric}}\",\n    \"purchase_history\":\"Grapes\",\n    \"shipping_address\":\"123, King N\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:7266/user/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7266",
+							"path": [
+								"user",
+								"register"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "milk@gmail.com",
+									"disabled": true
+								},
+								{
+									"key": "password",
+									"value": "milk123",
+									"disabled": true
+								},
+								{
+									"key": "username",
+									"value": "milkman",
+									"disabled": true
+								},
+								{
+									"key": "purchaseHistory",
+									"value": "Honey, Milk",
+									"disabled": true
+								},
+								{
+									"key": "shippingAddress",
+									"value": "123, Milk St N",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[GET] GetAllUsers",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:7266/user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7266",
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[PATCH] PatchUserByID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 204\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"pm.test(\"Response time is less than 200ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\":\"new Person\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:7266/user/{{userId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7266",
+							"path": [
+								"user",
+								"{{userId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[GET] GetUserByID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:7266/user/{{userId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7266",
+							"path": [
+								"user",
+								"{{userId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[GET] GetUserByID [Invalid ID]",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {",
+									"    pm.response.to.have.status(404);",
+									"});",
+									"",
+									"pm.test(\"[NEGATIVE TEST CASE] Invalid user ID entered to get users\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.message).to.eql(\"User not found\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:7266/user/6391671bf6836b0173612c35",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7266",
+							"path": [
+								"user",
+								"6391671bf6836b0173612c35"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[POST] UserLogin",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"pm.test(\"[NEGATIVE TEST CASE] User not found test\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.data).to.eql(\"User not found!\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\":\"milkam\",\n    \"password\":\"milk123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:7266/user/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7266",
+							"path": [
+								"user",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[POST] UserLogin [Invalid Password]",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"pm.test(\"[NEGATIVE TEST CASE] Invalid password entered\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.data).to.eql(\"Password does not match\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\":\"san\",\n    \"password\":\"milk123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:7266/user/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7266",
+							"path": [
+								"user",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Items",
+			"item": [
+				{
+					"name": "[POST] item",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"Successful POST request\"] = responseCode.code === 201 || responseCode.code === 202;",
+									"",
+									"var json = pm.response.json();",
+									"pm.collectionVariables.set('itemId', json.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"test-item\",\n  \"description\": \"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.\",\n  \"price\": 24.55,\n  \"imageUrl\": \"https://unsplash.com/photos/yZOfNnI2PA0\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:7266/Items",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7266",
+							"path": [
+								"Items"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[POST] item with invalid data",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"Invalid data\"] = responseCode.code === 400;"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"\",\n  \"description\": \"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.\",\n  \"price\": -3,\n  \"imageUrl\": \"https://unsplash.com/photos/yZOfNnI2PA0\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:7266/Items",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7266",
+							"path": [
+								"Items"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[GET] items",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:7266/Items",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7266",
+							"path": [
+								"Items"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[GET] item",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:7266/Items/{{itemId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7266",
+							"path": [
+								"Items",
+								"{{itemId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[GET] invalid item",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"Status code is 404\"] = responseCode.code === 404;"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:7266/Items/639bc6a688b88c87987efc41",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7266",
+							"path": [
+								"Items",
+								"639bc6a688b88c87987efc41"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[PUT] item",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"Successful PUT request\"] = responseCode.code === 200;"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"test-item-updated\",\n  \"description\": \"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. ----UPDATED\",\n  \"price\": 45.6,\n  \"imageUrl\": \"https://unsplash.com/photos/yZOfNnI2PA0\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:7266/Items/{{itemId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7266",
+							"path": [
+								"Items",
+								"{{itemId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[PUT] invalid item",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"Item not found\"] = responseCode.code === 404;"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"test-item-updated\",\n  \"description\": \"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. ----UPDATED\",\n  \"price\": 45.6,\n  \"imageUrl\": \"https://unsplash.com/photos/yZOfNnI2PA0\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:7266/Items/639bc6a688b88c87987efc41",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7266",
+							"path": [
+								"Items",
+								"639bc6a688b88c87987efc41"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Orders",
+			"item": [
+				{
+					"name": "[POST] order",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"Successful POST request\"] = responseCode.code === 201 || responseCode.code === 202;",
+									"",
+									"var json = pm.response.json();",
+									"pm.collectionVariables.set('orderId', json.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"userId\": \"{{userId}}\",\n  \"subTotal\": 200,\n  \"taxes\": 25,\n  \"totalAmount\": 225\n}"
+						},
+						"url": {
+							"raw": "http://localhost:7266/orders",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7266",
+							"path": [
+								"orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[POST] order with invalid userId",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"Invalid userId\"] = responseCode.code === 400;"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"userId\": \"639be15bc92565608c513c41\",\n  \"subTotal\": 200,\n  \"taxes\": 25,\n  \"totalAmount\": 225\n}"
+						},
+						"url": {
+							"raw": "http://localhost:7266/orders",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7266",
+							"path": [
+								"orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[POST] order with invalid amounts",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"Invalid amount\"] = responseCode.code === 400;"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"userId\": \"{{userId}}\",\n  \"subTotal\": -1,\n  \"taxes\": -2,\n  \"totalAmount\": -3\n}"
+						},
+						"url": {
+							"raw": "http://localhost:7266/orders",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7266",
+							"path": [
+								"orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[GET] orders",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:7266/orders?userId={{userId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7266",
+							"path": [
+								"orders"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": "{{userId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[GET] order",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:7266/orders/{{orderId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7266",
+							"path": [
+								"orders",
+								"{{orderId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[GET] order with invalid orderId",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"Status code is 404\"] = responseCode.code === 404;"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:7266/orders/639be15bc92565608c513c41",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7266",
+							"path": [
+								"orders",
+								"639be15bc92565608c513c41"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[PUT] order",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"Successful PUT request\"] = responseCode.code === 204;"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": \"{{orderId}}\",\n  \"userId\": \"{{userId}}\",\n  \"subTotal\": 300,\n  \"taxes\": 45,\n  \"totalAmount\": 345\n}"
+						},
+						"url": {
+							"raw": "http://localhost:7266/orders/{{orderId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7266",
+							"path": [
+								"orders",
+								"{{orderId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "OrderItems",
+			"item": [
+				{
+					"name": "[POST] order-item",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"Successful POST request\"] = responseCode.code === 201 || responseCode.code === 202;",
+									"",
+									"var json = pm.response.json();",
+									"pm.collectionVariables.set('orderItemId', json.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"orderId\": \"{{orderId}}\",\n  \"itemId\": \"{{itemId}}\",\n  \"price\": 34.5,\n  \"quantity\": 16,\n  \"amount\": 79.5\n}"
+						},
+						"url": {
+							"raw": "http://localhost:7266/OrderItems",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7266",
+							"path": [
+								"OrderItems"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[POST] order-item with invalid data",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"Invalid data\"] = responseCode.code === 400;"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"orderId\": \"639be15bc92565608c513c41\",\n  \"itemId\": \"639be15bc92565608c513c41\",\n  \"price\": -1,\n  \"quantity\": -2,\n  \"amount\": -3\n}"
+						},
+						"url": {
+							"raw": "http://localhost:7266/OrderItems",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7266",
+							"path": [
+								"OrderItems"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[GET] order-items",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:7266/OrderItems?OrderId={{orderId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7266",
+							"path": [
+								"OrderItems"
+							],
+							"query": [
+								{
+									"key": "OrderId",
+									"value": "{{orderId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[GET] order-item",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:7266/OrderItems/{{orderItemId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7266",
+							"path": [
+								"OrderItems",
+								"{{orderItemId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[GET] order-item with invalid id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"Status code is 404\"] = responseCode.code === 404;"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:7266/OrderItems/639be15bc92565608c513c41",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7266",
+							"path": [
+								"OrderItems",
+								"639be15bc92565608c513c41"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[PUT] order-item",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"Successful PUT request\"] = responseCode.code === 200;"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": \"{{orderItemId}}\",\n  \"orderId\": \"{{orderId}}\",\n  \"itemId\": \"{{itemId}}\",\n  \"price\": 24.5,\n  \"quantity\": 36,\n  \"amount\": 99.5\n}"
+						},
+						"url": {
+							"raw": "http://localhost:7266/OrderItems/{{orderItemId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7266",
+							"path": [
+								"OrderItems",
+								"{{orderItemId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[PUT] order-item with invalid id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"OrderItem not found\"] = responseCode.code === 404;"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": \"{{orderItemId}}\",\n  \"orderId\": \"{{orderId}}\",\n  \"itemId\": \"{{itemId}}\",\n  \"price\": 24.5,\n  \"quantity\": 36,\n  \"amount\": 99.5\n}"
+						},
+						"url": {
+							"raw": "http://localhost:7266/OrderItems/639be15bc92565608c513c41",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7266",
+							"path": [
+								"OrderItems",
+								"639be15bc92565608c513c41"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Carts",
+			"item": [
+				{
+					"name": "[POST] cart",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"Successful POST request\"] = responseCode.code === 201 || responseCode.code === 202;",
+									"",
+									"var json = pm.response.json();",
+									"pm.collectionVariables.set('cartId', json.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"userId\": \"{{userId}}\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:7266/Carts",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7266",
+							"path": [
+								"Carts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[POST] cart with invalid user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"User does not exist\"] = responseCode.code === 400;"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"userId\": \"639bc6a688b88c87987efc41\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:7266/Carts",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7266",
+							"path": [
+								"Carts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[GET] cart",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:7266/Carts/{{cartId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7266",
+							"path": [
+								"Carts",
+								"{{cartId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[GET] cart with invalid id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"Status code is 404\"] = responseCode.code === 404;"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:7266/Carts/639be15bc92565608c513c41",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7266",
+							"path": [
+								"Carts",
+								"639be15bc92565608c513c41"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[GET] UserCart",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:7266/User/{{userId}}/cart",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7266",
+							"path": [
+								"User",
+								"{{userId}}",
+								"cart"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[GET] UserCart with invalid userId",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"User not found\"] = responseCode.code === 404;"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:7266/User/639be15bc92565608c513c41/cart",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7266",
+							"path": [
+								"User",
+								"639be15bc92565608c513c41",
+								"cart"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "CartItems",
+			"item": [
+				{
+					"name": "[POST] cart-item",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"Successful POST request\"] = responseCode.code === 201 || responseCode.code === 202;",
+									"",
+									"var json = pm.response.json();",
+									"pm.collectionVariables.set('cartItemId', json.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"quantity\": 6,\n  \"amount\": 3,\n  \"itemId\": \"{{itemId}}\",\n  \"cartId\": \"{{cartId}}\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:7266/CartItems",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7266",
+							"path": [
+								"CartItems"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[POST] cart-item with invalid quantity",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"Invalid quantity\"] = responseCode.code === 400;"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"quantity\": 0,\n   \"amount\": 3,\n  \"itemId\": \"{{itemId}}\",\n  \"cartId\": \"{{cartId}}\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:7266/CartItems",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7266",
+							"path": [
+								"CartItems"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[POST] cart-item with invalid cartId",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"Invalid cartId\"] = responseCode.code === 400;"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"quantity\": 6,\n  \"amount\": 3,\n  \"itemId\": \"{{itemId}}\",\n  \"cartId\": \"639be15bc92565608c513c41\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:7266/CartItems",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7266",
+							"path": [
+								"CartItems"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[POST] cart-item with invalid itemId",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"Invalid itemId\"] = responseCode.code === 400;"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"quantity\": 6,\n  \"amount\": 3,\n  \"itemId\": \"639be15bc92565608c513c41\",\n  \"cartId\": \"{{cartId}}\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:7266/CartItems",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7266",
+							"path": [
+								"CartItems"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[GET] cart-items",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:7266/CartItems?cartId={{cartId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7266",
+							"path": [
+								"CartItems"
+							],
+							"query": [
+								{
+									"key": "cartId",
+									"value": "{{cartId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[GET] cart-item",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:7266/CartItems/{{cartItemId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7266",
+							"path": [
+								"CartItems",
+								"{{cartItemId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[GET] cart-item with invalid cartItemId",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"Status code is 404\"] = responseCode.code === 404;"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:7266/CartItems/639be15bc92565608c513c41",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7266",
+							"path": [
+								"CartItems",
+								"639be15bc92565608c513c41"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[PUT] cart-item",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"Successful PUT request\"] = responseCode.code === 200;"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": \"{{cartItemId}}\",\n  \"quantity\": 8\n}"
+						},
+						"url": {
+							"raw": "http://localhost:7266/CartItems/{{cartItemId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7266",
+							"path": [
+								"CartItems",
+								"{{cartItemId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[PUT] cart-item with invalid cartItemId",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"cart item not found\"] = responseCode.code === 404;"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": \"{{cartItemId}}\",\n  \"quantity\": 8\n}"
+						},
+						"url": {
+							"raw": "http://localhost:7266/CartItems/639be15bc92565608c513c41",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7266",
+							"path": [
+								"CartItems",
+								"639be15bc92565608c513c41"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Comments",
+			"item": [
+				{
+					"name": "PostComment",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"var json = pm.response.json();\r",
+									"pm.collectionVariables.set('commentId', json.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"abc\",\r\n    \"product\": \"{{itemId}}\",\r\n    \"user\": \"{{userId}}\",\r\n    \"rating\": 3,\r\n    \"image\": \"c:\\\\post\",\r\n    \"text\": \"This is a average product\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:7266/comments/create-comment",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7266",
+							"path": [
+								"comments",
+								"create-comment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PostComment Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"var json = pm.response.json();\r",
+									"pm.collectionVariables.set('commentId', json.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"abc\",\r\n    \"product\": \"{{itemId}}\",\r\n    \"user\": \"{{userId}}\",\r\n    \"rating\": 3,\r\n    \"image\": \"c:\\\\post\",\r\n    \"text\": \"This is a average product\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:7266/comments/create-comment",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7266",
+							"path": [
+								"comments",
+								"create-comment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetComment",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:7266/Comments/{{commentId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7266",
+							"path": [
+								"Comments",
+								"{{commentId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetComment [Invalid comment id]",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"[NEGATIVE TEST CASE] Enter invalid comment ID to get comment\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.message).to.eql(\"Comment not found!\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:7266/Comments/639bfd252aaf6f711f45a0bb",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7266",
+							"path": [
+								"Comments",
+								"639bfd252aaf6f711f45a0bb"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateComment",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 204\", function () {\r",
+									"    pm.response.to.have.status(204);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": \"{{commentId}}\",\r\n  \"product\": \"{{itemId}}\",\r\n  \"user\": \"{{userId}}\",\r\n  \"rating\": 4,\r\n  \"image\": \"imagePath\",\r\n  \"text\": \"This is a bad product\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:7266/Comments/{{commentId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7266",
+							"path": [
+								"Comments",
+								"{{commentId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateComment [Invalid comment ID]",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"[NEGATIVE TEST CASE] Enter invalid comment ID to update comment\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data).to.eql(\"Comment ID not found\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": \"{{commentId}}\",\r\n  \"product\": \"{{itemId}}\",\r\n  \"user\": \"{{userId}}\",\r\n  \"rating\": 4,\r\n  \"image\": \"imagePath\",\r\n  \"text\": \"This is a bad product\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:7266/Comments/639bfd252aaf6f711f45a0bb",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7266",
+							"path": [
+								"Comments",
+								"639bfd252aaf6f711f45a0bb"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Delete requests",
+			"item": [
+				{
+					"name": "[DELETE] cart-item",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"Successful DELETE request\"] = responseCode.code === 204;"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:7266/CartItems/{{cartItemId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7266",
+							"path": [
+								"CartItems",
+								"{{cartItemId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[DELETE] cart",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"Successful DELETE request\"] = responseCode.code === 204;"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:7266/Carts/{{cartId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7266",
+							"path": [
+								"Carts",
+								"{{cartId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[DELETE] order-item",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"Successful DELETE request\"] = responseCode.code === 204;"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:7266/OrderItems/{{orderItemId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7266",
+							"path": [
+								"OrderItems",
+								"{{orderItemId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[DELETE] order",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"Successful DELETE request\"] = responseCode.code === 204;"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:7266/orders/{{orderId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7266",
+							"path": [
+								"orders",
+								"{{orderId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteComment",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 204\", function () {\r",
+									"    pm.response.to.have.status(204);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:7266/Comments/{{commentId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7266",
+							"path": [
+								"Comments",
+								"{{commentId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[DELETE] item",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"Successful DELETE request\"] = responseCode.code === 204;"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:7266/Items/{{itemId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7266",
+							"path": [
+								"Items",
+								"{{itemId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[DELETE] User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"Successful DELETE request\"] = responseCode.code === 204;",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:7266/user/{{userId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7266",
+							"path": [
+								"user",
+								"{{userId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[DELETE] User [Invalid UserID]",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"Successful DELETE request\"] = responseCode.code === 404;",
+									"",
+									"pm.test(\"[NEGATIVE TEST CASE] Enter invalid user ID\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.message).to.eql(\"User not found\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:7266/user/639660d7575142f4a02aaff2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7266",
+							"path": [
+								"user",
+								"639660d7575142f4a02aaff2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "itemId",
+			"value": ""
+		},
+		{
+			"key": "userId",
+			"value": ""
+		},
+		{
+			"key": "cartId",
+			"value": ""
+		},
+		{
+			"key": "cartItemId",
+			"value": ""
+		},
+		{
+			"key": "orderId",
+			"value": ""
+		},
+		{
+			"key": "orderItemId",
+			"value": ""
+		},
+		{
+			"key": "commentId",
+			"value": ""
+		},
+		{
+			"key": "x",
+			"value": ""
+		}
+	]
+}

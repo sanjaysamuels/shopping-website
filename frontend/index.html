@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Super Store</title>
+    <script src="js/core.js"></script>
+    <script src="js/items-data.js"></script>
+    <script src="js/shopping.js"></script>
+    <link rel="stylesheet" href="styles/styles.css">
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg bg-light">
+          <div class="container-fluid">
+            <a class="navbar-brand" href="#">Super Store</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="#">Shopping</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" aria-current="page" href="orders.html">Orders</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="accounts.html">Accounts</a>
+                </li>
+              </ul>
+              <ul class="nav navbar-nav navbar-right">
+                <li class="nav-item">
+                  <a id="cart-link" class="d-flex flex-row align-items-center nav-link" href="shopping-cart.html">
+                    <p class="m-auto me-1"><span id="cart-icon" class="bi bi-cart-fill"></span></p><p id="cart-info" class="m-auto"></p>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+    </header>
+    <main class="p-4">
+      <div class="container-custom flex-center flex-row">
+        <section id="items-container" class="d-flex flex-row flex-wrap" style="max-height: 100%">
+          <div id="item-template" class="card visually-hidden ms-2 mt-2" style="width: 18rem;">
+            <img src="#" style="height: 214.5px" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Item Title</h5>
+              <p class="card-text fs-3 text-success">Item Price</p>
+              <a href="#" class="btn-custom-shop">More Info</a>
+            </div>
+          </div>
+        </section>
+      </div>
+
+    </main>
+</body>
+</html>
